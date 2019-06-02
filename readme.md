@@ -3,4 +3,4 @@ Run presentation using
 ```bash
 npx remarker
 ```
-Slides will be shown at <http://localhost:6275/>.rea
+Slides will be shown at <http://localhost:6275/>.
