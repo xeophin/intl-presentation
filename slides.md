@@ -1,6 +1,6 @@
 class: centered large-font
 
-You have 34 messages.
+You have 36 calls.
 
 ???
 You may know this message. You probably created it yourself. It's easy, really.
@@ -9,7 +9,7 @@ You may know this message. You probably created it yourself. It's easy, really.
 class: centered large-font
 
 ```javascript
-"You have " + numberOfMessages + " messages."
+"You have " + numberOfCalls + " calls."
 ```
 
 ???
@@ -18,41 +18,55 @@ So easy!
 ---
 class: centered 
 
-You have 34 messages.  
+You have 36 calls.  
 
 --
-You have 3 messages.  
+You have 3 calls.  
 
 --
-You have 1 messages.  
+You have 1 calls.  
 
 --
-You have 0 messages.  
+You have 0 calls.  
 ???
 Okay, so one of them doesn't work. But hey, an easy fix! Just add an condition that changes the text whenever the number is exactly 1.
 ---
 class: centered
-You have 34 messages.  
-You have 3 messages.  
-You have 1 message.  
-You have 0 messages.
+You have 36 calls.  
+You have 3 calls.  
+You have 1 call.  
+You have 0 calls.
 ???
-And then you're told that this has to work in other languages, too.
+And then you're told that this has to work in other languages, too. Like, Polish, so Karol can work with it, too.
 ---
 class: centered
-Sie haben 34 Nachrichten.  
-Sie haben 3 Nachrichten.  
-Sie haben 1 Nachricht.  
-Sie haben 0 Nachrichten.
+Masz 36 połączeń.  
+Masz 3 połączeń.  
+Masz 1 połączenie.  
+Masz 0 połączeń.
+???
+- … which is bullshit, since there are different plural forms, depending on the preceding number.
+- So you add a few new conditions that take care of this …
+---
+class: centered
+Masz 36 połączeń.  
+Masz 3 połączenia.  
+Masz 1 połączenie.  
+Masz 0 połączeń.
 ???
 And then for some reason your API screws up, and then
 ---
 class: centered
-You have 46.5714285714 messages.
+You have 36.5714285714 messages.
 ???
 - Now have to take care of that as well.
 - It's easy, just turn it into a string, and then split it at the period, and only use the first part.
 - Unless, of course, one browser uses a comma instead, at which point your code breaks.
+---
+classes: centered
+
+![Shit](https://media1.tenor.com/images/21771529a548c384aebe67f4db209467/tenor.gif?itemid=8203791)
+
 ---
 ## Hi, I'm Kaspar
 ####  I call myself Interactive Storytelling Developer
@@ -63,7 +77,146 @@ You have 46.5714285714 messages.
 - We turn data into visuals, and numbers into language.
 - We had a lot of such code in our projects.
 - With the different newsrooms being combined into one, we were suddenly tasked to produce our projects for the french speaking part of Switzerland as well – which made it obvious how *utterly* brittle our code really was.
+
 ---
+class: centered
+## Turning data into language
+???
+- We get pure data, and our task as front end developers is to turn this data into language
+- How to display data in a manner that's accessible however is based on convention and custom – which might be different from language to language, and from country to country.
+
+---
+class: centered
+
+|Language|Value: 8730023985.98979889336629|
+|--------|-------------------------------:|
+|German  |8’730’023’985.99                |
+|French  |8 730 023 985,99                |
+|English |8,730,023,985.99                |
+
+---
+class: centered
+
+|Language    |Timestamp: 896781600000|
+|------------|-----------------------|
+|English (US)|6/2/1998               |              
+|English (GB)|02/06/1998             |
+|German (CH) |2.6.1998               |
+|French (CH) |02.06.1998             |
+|French (FR) |02/06/1998             |
+
+???
+- Obviously, we're not the first programmers to encounter this problem.
+- The process is called **Internationalisation**, and most programming languages contain libraries that facilitate it
+- There is a large library that contains all these informations, that's being used by all the major software companies – the [Unicode Common Locale Data Repository](http://cldr.unicode.org/index)
+- That data is part of your operating system. And your browser. So take advantage of it!
+
+---
+# Intl
+???
+- JavaScript contains the **Intl** object, which covers numbers and date formatting
+- Also, depending on the browser, a few more things
+
+---
+# Intl.NumberFormat
+
+```js
+const formatForGerman = new Intl.NumberFormat('de-CH')
+formatForGerman(8730023985.98979889336629)
+//> 8’730’023’985.99
+```
+---
+## Currency
+```js
+const formatCurrency = new Intl.NumberFormat('de-CH', {
+  style: 'currency',
+  currency: 'CHF'
+})
+formatCurrency(8730023985.98979889336629)
+//> CHF 8’730’023’985.99
+```
+---
+## Percents
+```js
+const formatPercents = new Intl.NumberFormat('de-CH', {
+  style: 'percent',
+  maximumFractionDigits: 1
+})
+formatPercents(0.643362)
+//> 64.3%
+```
+
+---
+# Intl.DateTimeFormat
+```js
+const formatDate = new Intl.DateTimeFormat('fr-CH', {
+  weekday: 'long', 
+  day: 'numeric', 
+  month: 'long', 
+  year: 'numeric'
+})
+formatDate(new Date(896781600000))
+//> mardi, 2 juin 1998
+````
+---
+## Variations …
+```js
+const formatDate = new Intl.DateTimeFormat('fr-CH', {
+  weekday: 'long', 
+  day: 'numeric', 
+  month: 'numeric', 
+  year: 'numeric'
+})
+formatDate(new Date(896781600000))
+//> mardi, 02.06.1998
+````
+???
+- This is all very nice, but it only solves part of the problems we had above.
+
+---
+## FormatMessage
+
+```javascript
+import {FormatMessage} from 'intl-messageformat'
+```
+???
+- Not directly available in the browser, but available on NPM as a package
+- It uses its own message syntax, and it can be used to set up variations of messages as seen above
+
+---
+## Message Syntax
+
+```javascript
+const englishMessage = `You have {numberOfCalls, plural,
+  zero {no calls}
+  one {one call}
+  other {# calls}
+}.`
+
+const polishMessage = `Masz {numberOfCalls, plural,
+  zero {0 połączeń}
+  one {1 połączenie}
+  few {# połączenia}
+  many {# połączeń}
+  other {# połączeń}
+}.`
+```
+
+---
+```js
+const englishMsgFormat = new FormatMessage(englishMessage, 'en-GB')
+englishMsgFormat.format({numberOfCalls: numberOfCalls})
+```
+
+---
+## Why is it nice?
+???
+- The message format is entirely text based
+- It allows you to create CSV, JSON or YAML files with your translatable strings and let translators take care of the peculiarities of their language
+
+
+---
+exclude: true
 ## We do stuff like this:
 ???
 - [In eisigen Tiefen](https://interaktiv.tagesanzeiger.ch/2017/eisige-tiefen/?openincontroller)
@@ -76,200 +229,9 @@ With the different newsrooms being combined into one, we're also doing this:
 
 At first, we just created forks of your projects, and translated them. But then we started to become ambitious. And we started to run into problems.
 
----
-name: numbers
-## Data, meet Language
 
 
 
-
-???
-Front-end development is – among other things – about turning data into language.
-
---
-### Data: 8730023985.98979889334629
-
-???
-This is an ugly number. But it's fine. We can use `toString()`, right?
-
---
-```js
-uglyNumber.toString()
-````
-> "8730023985.9898"
-
-???
-- This is, frankly, not that much better.
-- Now, our code was littered with string manipulation afterwards
-- Take periods and replace them with commas.
-- Split the string at the period, take the first part, create groups of three characters each, add apostrophes …
-
---
-> "8’730’023’985.99"
-
-???
-This is closer to what we want. In the German speaking part of Switzerland, anyway. 
-
----
-## Data has to be translated into language
-
-Data: 8730023985.98979889334629
-
-German: 8’730’023’985.99
-French: 8 730 023 985,99
-English: 8,730,023,985.99
-
-???
-Of course, you can just rewrite your string manipulation code for every language you want to support, but … really?
-
-___
-name: dates
-## It's not just numbers …
-
---
-
-Data: 896781600000
-
-???
-This is a date. Any guesses?
-
---
-Language 1: "6/2/1998"
-
---
-
-Language 2: "02/06/1998"
-
---
-
-Language 3: "2.6.1998"
-
---
-
-Language 4: "02.06.1998"
-
---
-
-Language 5: "02/06/1998"
-
-???
-1. US English
-2. English in Great Britain
-3. German in Switzerland
-4. French in Switzerland
-5. French in France
-
----
-classes: center middle
-
-> ## You have 1 messages
-
-Looks familiar?
-
----
-
-## Data, meet language
-
-```javascript
-const msg = `You have ${numberOfMessages} messages.`
-```
-
-> You have 3 messages.
-> You have 0 messages.
-> You have 1 messages.
-
----
-
-## Let's improve this
-
-```javascript
-const msg = `You have ${numberOfMessages} message${numberOfMessages > 1 ? 's' : ''}.`
-```
-
-> You have 3 messages.
-> You have 1 message.
-> You have 0 message.
-
----
-## Okay, not quite
-
-```javascript
-let msg = `You have ${numberOfMessages} messages.`
-if (numberOfMessages === 1) {
-  msg = `You have ${numberOfMessages} message.`
-}
-```
-
-> You have 3 messages.
-> You have 1 message.
-> You have 0 messages.
-
----
-## More languages!
-
-```javascript
-let msg = ''
-
-if (lang === 'en') {
-  msg = `You have ${numberOfMessages} messages.`
-  if (numberOfMessages === 1) {
-    msg = `You have ${numberOfMessages} message.`
-  }
-} else if (lang === 'de') {
-  msg = `Du hast ${numberOfMessages} Nachrichten.`
-  if (numberOfMessages === 1) {
-    msg = `Du hast ${numberOfMessages} Nachricht.`
-  }
-}
-```
-
-> You have 3 messages.
-> You have 1 message.
-> You have 0 messages.
-> Du hast 3 Nachrichten.
-> Du hast 1 Nachricht.
-> Du hast 0 Nachrichten.
-
----
-## Even more!
-
-- [ ] Find language with more plural forms, like arabic
-
----
-classes: center middle
-
-![Shit](https://media1.tenor.com/images/21771529a548c384aebe67f4db209467/tenor.gif?itemid=8203791)
-
-
----
-## `Intl`
-
-???
-- Internationalisation is a common problem
-- Despite this, it has been only recently added to the browser APIs
-- 
-
----
-## DateTimeFormat
-
----
-## NumberFormat
-
----
-## FormatMessage
-
-Not available directly as a browser API.
-
-```javascript
-import {FormatMessage} from 'intl-format-message'
-```
-
----
-## Message Syntax
-
-```javascript
-const message = `You have {plural {}}`
-```
 
 ---
 ## Status of `Intl` features
@@ -281,7 +243,7 @@ const message = `You have {plural {}}`
 | NumberFormat   | Standard | Most browsers         |
 | ListFormat     | Draft    | Chrome 72             |
 | PluralRules    | Draft    | Chrome 63, Firefox 58 |
-| RelativeTime   | Stage 3  | CHrome 71, Firefox 65 |
+| RelativeTime   | Stage 3  | Chrome 71, Firefox 65 |
 
 ---
 ## Polyfill
