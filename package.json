@@ -1,0 +1,37 @@
+{
+  "name": "intl-presentation",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Presentation on the use of Intl in front-end development",
+  "main": "slides.md",
+  "scripts": {
+    "start": "remarker"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xeophin/intl-presentation.git"
+  },
+  "author": "Kaspar Manz <kaspar.manz@tamedia.ch>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xeophin/intl-presentation/issues"
+  },
+  "homepage": "https://github.com/xeophin/intl-presentation#readme",
+  "devDependencies": {
+    "husky": ">=1",
+    "lint-staged": ">=8",
+    "prettier": "^1.17.1",
+    "remarker": "^1.10.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,json,md,yml,yaml,scss}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
