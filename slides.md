@@ -233,7 +233,10 @@ const polishMessage = `Masz {numberOfCalls, plural,
 
 ```js
 const englishMsgFormat = new FormatMessage(englishMessage, "en-GB");
-englishMsgFormat.format({ numberOfCalls: numberOfCalls });
+
+englishMsgFormat.format({
+  numberOfCalls: numberOfCalls
+});
 ```
 
 ---
