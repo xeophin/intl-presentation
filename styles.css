@@ -17,6 +17,14 @@ pre,
   font-family: "Source Code Pro", monospace;
 }
 
+.remark-container {
+  background-color: black;
+}
+
+.remark-slide-scaler {
+  box-shadow: none;
+}
+
 .remark-slide-content {
   background-color: #000;
   color: rgba(255, 255, 255, 0.9);
@@ -31,10 +39,11 @@ pre,
   right: 0;
   align-items: center;
   justify-content: center;
+  letter-spacing: 0.03ch;
 }
 .remark-slide-content h1,
 .remark-slide-content h2,
-.remark-slide-content h3 {
+.remark-slide-content h3, .remark-slide-content a:link, .remark-slide-content a:visited {
   color: #ff0050;
 }
 .remark-slide-content table {
