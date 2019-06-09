@@ -42,8 +42,8 @@ Masz 36 połączeń.
 Masz 3 połączeń.  
 Masz 1 połączenie.  
 Masz 0 połączeń.
-???
 
+???
 - … which is bullshit, since there are different plural forms, depending on the preceding number.
 - So you add a few new conditions that take care of this …
 
@@ -53,12 +53,15 @@ Masz 36 połączeń.
 Masz 3 połączenia.  
 Masz 1 połączenie.  
 Masz 0 połączeń.
+
 ???
-And then for some reason your API screws up, and then
+
+And then for some reason your API screws up, and delivers a really precise number of calls.
 
 ---
 
 You have 36.5714285714 messages.
+
 ???
 
 - Now have to take care of that as well.
@@ -205,7 +208,6 @@ import { FormatMessage } from "intl-messageformat";
 ```
 
 ???
-
 - Not directly available in the browser, but available on NPM as a package
 - It uses its own message syntax, and it can be used to set up variations of messages as seen above
 
@@ -214,13 +216,16 @@ import { FormatMessage } from "intl-messageformat";
 ## Message Syntax
 
 ```javascript
-const englishMessage = `You have {numberOfCalls, plural,
+message['en-GB'] = `You have {numberOfCalls, plural,
   zero {no calls}
   one {one call}
   other {# calls}
 }.`;
-
-const polishMessage = `Masz {numberOfCalls, plural,
+```
+---
+## Message Syntax
+```js
+message['pl-PL'] = `Masz {numberOfCalls, plural,
   zero {0 połączeń}
   one {1 połączenie}
   few {# połączenia}
@@ -230,11 +235,16 @@ const polishMessage = `Masz {numberOfCalls, plural,
 ```
 
 ---
+## Usage
 
 ```js
-const englishMsgFormat = new FormatMessage(englishMessage, "en-GB");
+// currentLanguage is either 'en-GB' or 'pl-PL'
+const msgFormat = new FormatMessage(
+  message[currentLanguage], 
+  currentLanguage
+);
 
-englishMsgFormat.format({
+msgFormat.format({
   numberOfCalls: numberOfCalls
 });
 ```
@@ -273,3 +283,6 @@ englishMsgFormat.format({
 
 Kaspar Manz  
 @xeophin
+
+Links and presentation can be found under  
+<https://github.com/xeophin/intl-presentation>
