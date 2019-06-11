@@ -7,6 +7,7 @@
 - [intl-messageformat](https://github.com/formatjs/formatjs/tree/master/packages/intl-messageformat)
 - [ICU Message Format Syntax](http://userguide.icu-project.org/formatparse/messages)
 - [Polyfill.io](https://polyfill.io/v3/) – Polyfill service that serves polyfills based on the browser headers (meaning: less stuff to download for modern browsers)
+- [Interactive playground that demoes the various `Intl` Properties](https://observablehq.com/@xeophin/turning-data-into-language)
 
 ## About the presentation
 
