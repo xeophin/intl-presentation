@@ -73,10 +73,14 @@ You have 36.5714285714 messages.
 - Now have to take care of that as well.
 - It's easy, just turn it into a string, and then split it at the period, and only use the first part.
 - Unless, of course, one browser uses a comma instead, at which point your code breaks.
+- You went from one line of code to a massive, steaming pile of … conditions
 
 ---
 
 ![Shit](https://media1.tenor.com/images/21771529a548c384aebe67f4db209467/tenor.gif?itemid=8203791)
+
+???
+- You might have a condition.
 
 ---
 
@@ -86,11 +90,11 @@ You have 36.5714285714 messages.
 
 ???
 
-- I work for «Redaktion Tamedia»
-- Whenever a journalist wants to do some fancy storytelling in a story, we're going to program it.
+- Fancy way of saying front end developer – with a bit more responsibilities
+- Our team of four developers work for paid media
+- Whenever a journalist wants to do some fancy storytelling in a story, we're going to program it. Can be data visualisations, interactive pieces, large multimedia stories
 - We turn data into visuals, and numbers into language.
-- We had a lot of such code in our projects.
-- With the different newsrooms being combined into one, we were suddenly tasked to produce our projects for the french speaking part of Switzerland as well – which made it obvious how _utterly_ brittle our code really was.
+- We also assist with the storytelling, we decide on the UX, we do the graphic design
 
 ---
 
@@ -99,7 +103,11 @@ You have 36.5714285714 messages.
 ???
 
 - We get pure data, and our task as front end developers is to turn this data into language
-- How to display data in a manner that's accessible however is based on convention and custom – which might be different from language to language, and from country to country.
+- In a lot of cases, we try to create sensible sentences out of the data. Going from "what is the data" to "what does it mean – to you personally". So we create a lot of "You have such-and-such many calls"-type messages.
+- All our code was very German specific
+- with the big reshuffling of the department, we were also tasked to create visuals and standalones for the western part of Switzerland – so our stuff had to work in French as well
+- This is where we realised that conventions on how data is represented will differ from language to language
+
 
 ---
 
@@ -108,6 +116,10 @@ You have 36.5714285714 messages.
 | German   |                 8’730’023’985.99 |
 | French   |                 8 730 023 985,99 |
 | English  |                 8,730,023,985.99 |
+
+???
+- Different decimal and grouping separators
+- Depending on the number, this can be ambiguous
 
 ---
 
@@ -121,6 +133,7 @@ You have 36.5714285714 messages.
 
 ???
 
+- It even depends on the region
 - Obviously, we're not the first programmers to encounter this problem.
 - The process is called **Internationalisation**, and most programming languages contain libraries that facilitate it
 - There is a large library that contains all these informations, that's being used by all the major software companies – the [Unicode Common Locale Data Repository](http://cldr.unicode.org/index)
@@ -152,11 +165,14 @@ formatForGerman(8730023985.98979889336629);
 ```js
 const formatCurrency = new Intl.NumberFormat("de-CH", {
   style: "currency",
-  currency: "CHF"
+  currency: "USD"
 });
 formatCurrency(8730023985.98979889336629);
-//> CHF 8’730’023’985.99
+//> $ 8’730’023’985.99
 ```
+
+???
+- Uses correct currency symbol
 
 ---
 
@@ -170,6 +186,9 @@ const formatPercents = new Intl.NumberFormat("de-CH", {
 formatPercents(0.643362);
 //> 64.3%
 ```
+
+???
+- No more rounding!
 
 ---
 
@@ -203,8 +222,9 @@ formatDate(new Date(896781600000));
 
 ???
 
+- We only changed one property, but the format adapted other parts as well
 - This is all very nice, but it only solves part of the problems we had above.
-
+- We still have the plural rules
 ---
 
 ## FormatMessage
@@ -236,7 +256,6 @@ message['pl-PL'] = `Masz {numberOfCalls, plural,
   one {1 połączenie}
   few {# połączenia}
   many {# połączeń}
-  other {# połączeń}
 }.`;
 ```
 
@@ -244,15 +263,15 @@ message['pl-PL'] = `Masz {numberOfCalls, plural,
 ## Usage
 
 ```js
-// currentLanguage is either 'en-GB' or 'pl-PL'
 const msgFormat = new FormatMessage(
-  message[currentLanguage], 
-  currentLanguage
+  message["pl-PL"], 
+  "pl-PL"
 );
 
 msgFormat.format({
-  numberOfCalls: numberOfCalls
+  numberOfCalls: 114
 });
+//> "Masz 114 połączeń"
 ```
 
 ---
@@ -263,6 +282,7 @@ msgFormat.format({
 
 - The message format is entirely text based
 - It allows you to create CSV, JSON or YAML files with your translatable strings and let translators take care of the peculiarities of their language
+- A lot less code to maintain
 
 ---
 
