@@ -45,6 +45,12 @@ Masz 0 połączeń.
 
 ???
 - … which is bullshit, since there are different plural forms, depending on the preceding number.
+- It's easy to think that the "one form for one object, another form for everything else is common in all languages".
+- Polish is a bit different:
+  - One form for 1 object
+  - Another form for "a few" objects, from 2–4
+  - From 5–21 objects, you have a form for _many_ objects
+  - 22–24 objects are just few objects, again
 - So you add a few new conditions that take care of this …
 
 ---
