@@ -30,3 +30,11 @@ Slides will be shown at <http://localhost:6275/>.
 
 - Press <kbd>P</kbd> to open presenter view.
 - Press <kbd>C</kbd> to open a connected clone view (see [here](https://github.com/gnab/remark/wiki/Presentation-mode))
+
+### PDF Export
+
+Run
+
+```bash
+yarn create-pdf
+```
