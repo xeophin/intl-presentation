@@ -1,2 +1,5 @@
 cssFiles:
   - ./styles.css
+remarkConfig:
+  highlightStyle: ir-black
+  highlightLines: true

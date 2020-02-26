@@ -1,25 +1,11 @@
-@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,700&display=swap");
-
 :root {
   --color-muted: rgba(255, 255, 255, 0.33);
   --color-strong: rgba(255, 255, 255, 1);
 }
 
-body {
-  font-family: "Source Sans Pro", sans-serif !important;
-  font-size: 2em !important;
-}
-
-blockcode,
-code,
-pre,
-.remark-code,
-.remark-inline-code {
-  font-family: "Source Code Pro", monospace;
-}
-
 .remark-container {
   background-color: black;
+  font-family: system-ui, sans-serif;
 }
 .remark-slide-scaler {
   box-shadow: none;
@@ -28,18 +14,42 @@ pre,
 .remark-slide-content {
   background-color: #000;
   color: rgba(255, 255, 255, 0.9);
-  font-size: 1em;
-  padding: 1rem 4rem 1rem 4rem;
+  font-size: 4vh;
+  padding: 0;
   display: flex;
   flex-flow: column nowrap;
+  justify-content: center;
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 0;
   right: 0;
-  align-items: center;
-  justify-content: center;
-  letter-spacing: 0.03ch;
+  bottom: 0;
+
+  @media print {
+    padding: 1rem;
+  }
+
+  & > *:first-child {
+    margin-top: 0;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+
+  .remark-code {
+    padding: 0;
+    background: transparent;
+  }
+
+  .remark-code, .remark-inline-code {
+    font-family: "JetBrains Mono", "IBM Plex Mono", monospace;
+    font-size: 3.5vh;
+  }
+
+  .remark-slide-number {
+    font-size: 2vh;
+  }
 
   h1,
   h2,
@@ -49,6 +59,7 @@ pre,
 
   table {
     border-collapse: collapse;
+    width: 100%;
   }
 
   tbody tr {
@@ -73,12 +84,4 @@ pre,
   th:first-of-type {
     padding-right: 0;
   }
-}
-
-.remark-code {
-  font-size: 0.75em;
-}
-
-.large-font {
-  font-size: 2rem;
 }

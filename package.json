@@ -5,8 +5,10 @@
   "description": "Presentation on the use of Intl in front-end development",
   "main": "slides.md",
   "scripts": {
-    "start": "remarker",
-    "create-pdf": "yarn start && decktape remark http://localhost:6275/ slides.pdf"
+    "scss": "node-sass-chokidar styles.scss styles.css",
+    "scss:watch": "node-sass-chokidar --watch styles.scss styles.css",
+    "start": "yarn scss && remarker",
+    "create-pdf": "decktape remark http://localhost:6275/ slides.pdf"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,7 @@
     "husky": ">=1",
     "lint-staged": ">=8",
     "node-pre-gyp": "^0.14.0",
+    "node-sass-chokidar": "^1.4.0",
     "prettier": "^1.17.1",
     "remarker": "^1.10.0"
   }
