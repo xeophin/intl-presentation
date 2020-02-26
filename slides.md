@@ -153,9 +153,11 @@ You have 36.5714285714 messages.
 # Intl.NumberFormat
 
 ```js
-const formatForGerman = new Intl.NumberFormat("de-CH");
-formatForGerman(8730023985.98979889336629);
-//> 8’730’023’985.99
+const formatForGerman = 
+  new Intl.NumberFormat("de-CH").format;
+
+formatForGerman(23985.9897);
+//> 23’985.99
 ```
 
 ---
@@ -166,9 +168,10 @@ formatForGerman(8730023985.98979889336629);
 const formatCurrency = new Intl.NumberFormat("de-CH", {
   style: "currency",
   currency: "USD"
-});
-formatCurrency(8730023985.98979889336629);
-//> $ 8’730’023’985.99
+}).format;
+
+formatCurrency(23985.9897);
+//> $ 23’985.99
 ```
 
 ???
@@ -182,7 +185,8 @@ formatCurrency(8730023985.98979889336629);
 const formatPercents = new Intl.NumberFormat("de-CH", {
   style: "percent",
   maximumFractionDigits: 1
-});
+}).format;
+
 formatPercents(0.643362);
 //> 64.3%
 ```
@@ -200,7 +204,8 @@ const formatDate = new Intl.DateTimeFormat("fr-CH", {
   day: "numeric",
   month: "long",
   year: "numeric"
-});
+}).format;
+
 formatDate(new Date(896781600000));
 //> mardi, 2 juin 1998
 ```
@@ -215,7 +220,8 @@ const formatDate = new Intl.DateTimeFormat("fr-CH", {
   day: "numeric",
   month: "numeric",
   year: "numeric"
-});
+}).format;
+
 formatDate(new Date(896781600000));
 //> mardi, 02.06.1998
 ```
