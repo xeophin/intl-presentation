@@ -1,11 +1,12 @@
 :root {
   --color-muted: rgba(255, 255, 255, 0.33);
   --color-strong: rgba(255, 255, 255, 1);
+  --color-accent: #ff0050
 }
 
 .remark-container {
   background-color: black;
-  font-family: system-ui, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 .remark-slide-scaler {
   box-shadow: none;
@@ -37,6 +38,10 @@
     margin-bottom: 0;
   }
 
+  strong, b {
+    color: var(--color-accent);
+  }
+
   .remark-code {
     padding: 0;
     background: transparent;
@@ -53,8 +58,45 @@
 
   h1,
   h2,
-  h3, a:link, a:visited {
-    color: #ff0050;
+  h3,
+  h4,
+  a:link,
+  a:visited {
+    color: var(--color-accent);
+    line-height: 2ex;
+    margin-bottom: 0;
+    margin-top: 1ex;
+
+    strong, b {
+      font-weight: 800;
+    }
+  }
+
+  h1 {
+    font-weight: 100;
+    font-size: calc(100vh / 5);
+  }
+
+  h2 {
+    font-weight: 200;
+    font-size: calc(100vh / 10);
+
+  }
+
+  h3 {
+    font-weight: 300;
+    font-size: calc(100vh / 15);
+  }
+
+  h4 {
+    font-weight: 400;
+    font-size: calc(100vh / 20);
+  }
+
+  h1 + h2,
+  h2 + h3,
+  h3 + h4 {
+    margin-top: 0;
   }
 
   table {

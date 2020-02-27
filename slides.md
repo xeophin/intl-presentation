@@ -1,4 +1,4 @@
-You have 36 calls.
+# You have<br>36 calls.
 
 ???
 You may know this message. You probably created it yourself. It's easy, really.
@@ -12,18 +12,21 @@ You may know this message. You probably created it yourself. It's easy, really.
 ???
 So easy!
 
+Let's say you create a super simple video call app, that also works for your grandma, because you should call grandma more often.
+
 ---
 
-You have 36 calls.<br/>
-
+You have 36 calls.  
 --
-You have 3 calls.<br/>
 
+You have 3 calls.  
 --
-You have 1 calls.<br/>
 
+You have 1 calls.  
 --
+
 You have 0 calls.  
+
 ???
 Okay, so one of them doesn't work. But hey, an easy fix! Just add an condition that changes the text whenever the number is exactly 1.
 
@@ -31,10 +34,11 @@ Okay, so one of them doesn't work. But hey, an easy fix! Just add an condition t
 
 You have 36 calls.  
 You have 3 calls.  
-You have 1 call.  
+**You have 1 call.**  
 You have 0 calls.
+
 ???
-And then you're told that this has to work in other languages, too. Like, Polish, so Karol can work with it, too.
+Now, your coworker from Poland walks past you and mentions that this would be great for her grandmother as well, but it needs to be translated to Polish, since her grandmother only speaks Polish. So you take to Google Translate …
 
 ---
 
@@ -56,15 +60,21 @@ Masz 0 połączeń.
 ---
 
 Masz 36 połączeń.  
-Masz 3 połączenia.  
+**Masz 3 połączenia.**  
 Masz 1 połączenie.  
 Masz 0 połączeń.
 
 ???
+This is more how it should look like.
 
-And then for some reason your API screws up, and delivers a really precise number of calls.
+So, at this point your code consists of at least 5 different conditions.
+
+Now, another coworker sees what you are doing, and they have this lovely aunt they should call more often, and the aunt lives in Lebanon, and speaks Arabic.
+
+You know where this is going.
 
 ---
+exclude: true
 
 You have 36.5714285714 messages.
 
@@ -73,55 +83,76 @@ You have 36.5714285714 messages.
 - Now have to take care of that as well.
 - It's easy, just turn it into a string, and then split it at the period, and only use the first part.
 - Unless, of course, one browser uses a comma instead, at which point your code breaks.
-- You went from one line of code to a massive, steaming pile of … conditions
+
 
 ---
 
 ![Shit](https://media1.tenor.com/images/21771529a548c384aebe67f4db209467/tenor.gif?itemid=8203791)
 
 ???
+- You went from one line of code to a massive, steaming pile of … conditions
 - You might have a condition.
 
 ---
 
 ## Hi, I'm Kaspar
-
-#### I call myself Interactive Storytelling Developer
+### I call myself Interactive Storytelling Developer
 
 ???
-
 - Fancy way of saying front end developer – with a bit more responsibilities
-- Our team of four developers work for paid media
+- Our team of four developers work for Tamedia
 - Whenever a journalist wants to do some fancy storytelling in a story, we're going to program it. Can be data visualisations, interactive pieces, large multimedia stories
 - We turn data into visuals, and numbers into language.
 - We also assist with the storytelling, we decide on the UX, we do the graphic design
 
 ---
+???
+Now that we have been aquainted, let's do a little exercise.
 
-## Turning data into language
+I will show you a number, on the count of three. Please shout in your mothertongue its rounded value.
+
+--
+class: center
+# 10,001
 
 ???
+Raise your hand if you said 10
 
-- We get pure data, and our task as front end developers is to turn this data into language
-- In a lot of cases, we try to create sensible sentences out of the data. Going from "what is the data" to "what does it mean – to you personally". So we create a lot of "You have such-and-such many calls"-type messages.
-- All our code was very German specific
-- with the big reshuffling of the department, we were also tasked to create visuals and standalones for the western part of Switzerland – so our stuff had to work in French as well
-- This is where we realised that conventions on how data is represented will differ from language to language
+Raise your hand if you said 10'000
 
-
+Both is correct – depending on where you are from.
 ---
 
-| Language | Value: 8730023985.98979889336629 |
-| -------- | -------------------------------: |
-| German   |                 8’730’023’985.99 |
-| French   |                 8 730 023 985,99 |
-| English  |                 8,730,023,985.99 |
+#### Numbers don't look the same in all the languages
+
+|  | Value: 23985.989 |
+| :-------- | :------------------------------- |
+| In a German text   |                 23’985.99 |
+| In a French text  |                 23 985,99 |
+| In an English text |                 23,985.99 |
 
 ???
 - Different decimal and grouping separators
 - Depending on the number, this can be ambiguous
 
 ---
+
+## Turning data into text
+### means taking into account the **language** and **region** of our readers
+
+???
+
+- In a lot of cases, we try to create sensible sentences out of data. Going from "what is the data" to "what does it mean – to you personally". So we create a lot of "You have such-and-such many calls"-type messages.
+    - Example: Tax Rate Map of Switzerland
+- We have copy editors that make sure that all the text we produce is correct
+- Tamedia also has properties in Western Switzerland, so we had to produce the same content in French as well.
+- Obviously, we're not the first programmers to encounter this problem.
+- The process is called **Internationalisation**, and most programming languages contain libraries that facilitate it
+- There is a large library that contains all these informations, that's being used by all the major software companies – the [Unicode Common Locale Data Repository](http://cldr.unicode.org/index)
+- That data is part of your operating system. And your browser. So take advantage of it!
+
+---
+exclude: true
 
 | Language     | Timestamp: 896781600000 |
 | ------------ | ----------------------- |
@@ -132,26 +163,24 @@ You have 36.5714285714 messages.
 | French (FR)  | 02/06/1998              |
 
 ???
-
 - It even depends on the region
-- Obviously, we're not the first programmers to encounter this problem.
-- The process is called **Internationalisation**, and most programming languages contain libraries that facilitate it
-- There is a large library that contains all these informations, that's being used by all the major software companies – the [Unicode Common Locale Data Repository](http://cldr.unicode.org/index)
-- That data is part of your operating system. And your browser. So take advantage of it!
+
 
 ---
 
 # Intl
+## lives right in your browser
 
 ???
-
 - JavaScript contains the **Intl** object, which covers numbers and date formatting
 - Also, depending on the browser, a few more things
 
 ---
+layout: true
 
-# Intl.NumberFormat
+### Intl.NumberFormat
 
+---
 ```js
 const formatForGerman = 
   new Intl.NumberFormat("de-CH").format;
@@ -161,6 +190,7 @@ formatForGerman(23985.9897);
 ```
 
 ---
+exclude: true
 
 ## Currency
 
@@ -178,9 +208,6 @@ formatCurrency(23985.9897);
 - Uses correct currency symbol
 
 ---
-
-## Percents
-
 ```js
 const formatPercents = new Intl.NumberFormat("de-CH", {
   style: "percent",
@@ -195,9 +222,11 @@ formatPercents(0.643362);
 - No more rounding!
 
 ---
+layout: true
+### Intl.DateTimeFormat
 
-# Intl.DateTimeFormat
-
+---
+exclude: true
 ```js
 const formatDate = new Intl.DateTimeFormat("fr-CH", {
   weekday: "long",
@@ -211,8 +240,7 @@ formatDate(new Date(896781600000));
 ```
 
 ---
-
-## Variations …
+exclude: true
 
 ```js
 const formatDate = new Intl.DateTimeFormat("fr-CH", {
@@ -231,46 +259,58 @@ formatDate(new Date(896781600000));
 - We only changed one property, but the format adapted other parts as well
 - This is all very nice, but it only solves part of the problems we had above.
 - We still have the plural rules
----
 
-## FormatMessage
+---
+layout: false
+
+## Formatting Messages
+???
+- Now, we know how to format numbers, but how do we deal with the plural forms?
+- Not directly available in the browser, but available on NPM as a package
+--
 
 ```javascript
 import { FormatMessage } from "intl-messageformat";
 ```
 
 ???
-- Not directly available in the browser, but available on NPM as a package
-- It uses its own message syntax, and it can be used to set up variations of messages as seen above
+- It uses its own mini syntax, and it can be used to set up variations of messages as seen above
 
 ---
-
-## Message Syntax
+layout: true
+### Message Syntax
+---
 
 ```javascript
-message['en-GB'] = `You have {numberOfCalls, plural,
-  zero {no calls}
-  one {one call}
-  other {# calls}
-}.`;
+const englishMessage = 
+  `You have {numberOfCalls, plural,
+    zero {no calls}
+    one {one call}
+    other {# calls}
+  }.`;
 ```
+
+???
+- This syntax is a standard proposed by the ICU, the body that collects all the localisation data.
 ---
-## Message Syntax
+
 ```js
-message['pl-PL'] = `Masz {numberOfCalls, plural,
-  zero {0 połączeń}
-  one {1 połączenie}
-  few {# połączenia}
-  many {# połączeń}
-}.`;
+const polishMessage = 
+  `Masz {numberOfCalls, plural,
+    zero {0 połączeń}
+    one {1 połączenie}
+    few {# połączenia}
+    many {# połączeń}
+  }.`;
 ```
 
 ---
-## Usage
+layout: false
+### Usage
 
 ```js
 const msgFormat = new FormatMessage(
-  message["pl-PL"], 
+  polishMessage, 
   "pl-PL"
 );
 
@@ -284,21 +324,35 @@ msgFormat.format({
 
 ## Why is it nice?
 
-???
+--
+- Format is text based – import strings from CSV, JSON or YAML files
 
-- The message format is entirely text based
-- It allows you to create CSV, JSON or YAML files with your translatable strings and let translators take care of the peculiarities of their language
-- A lot less code to maintain
+--
+- … and let someone else translate those messages
+
+???
+Leave it to the experts
+--
+- Also helps with gendered language
+
+???
+Some languages are more heavily gendered than English – take Spanish
+
+--
+- Less code to maintain
+
+???
+Meaning: less opportunities for bugs to creep in
 
 ---
 
-# Does it work everywhere?
+## Does it work everywhere?
 
 | Feature        |  Status  | Browser Support       |
 | -------------- | -------- | --------------------- |
-| Collator       | Standard | Most browsers         |
-| DateTimeFormat | Standard | Most browsers         |
 | NumberFormat   | Standard | Most browsers         |
+| DateTimeFormat | Standard | Most browsers         |
+| Collator       | Standard | Most browsers         |
 | ListFormat     | Draft    | Chrome 72             |
 | PluralRules    | Draft    | Chrome 63, Firefox 58 |
 | RelativeTime   | Stage 3  | Chrome 71, Firefox 65 |
