@@ -24,7 +24,7 @@
     "decktape": "^2.9.3",
     "husky": ">=1",
     "lint-staged": ">=8",
-    "node-pre-gyp": "^0.14.0",
+    "node-pre-gyp": "^0.15.0",
     "node-sass-chokidar": "^1.4.0",
     "prettier": "^1.17.1",
     "remarker": "^1.10.0"
