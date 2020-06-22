@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/xeophin/intl-presentation#readme",
   "devDependencies": {
-    "decktape": "^2.9.3",
+    "decktape": "^3.0.0",
     "husky": ">=4",
     "lint-staged": ">=10",
     "node-pre-gyp": "^0.15.0",
