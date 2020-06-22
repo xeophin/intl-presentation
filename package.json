@@ -27,6 +27,6 @@
     "node-pre-gyp": "^0.15.0",
     "node-sass-chokidar": "^1.5.0",
     "prettier": "^2.0.5",
-    "remarker": "^1.10.0"
+    "remarker": "^1.12.1"
   }
 }
