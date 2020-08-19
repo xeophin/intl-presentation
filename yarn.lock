@@ -3590,10 +3590,10 @@ regex-not@^1.0.0, regex-not@^1.0.2:
     extend-shallow "^3.0.2"
     safe-regex "^1.1.0"
 
-remarker@^1.10.0:
-  version "1.11.2"
-  resolved "https://registry.yarnpkg.com/remarker/-/remarker-1.11.2.tgz#4cba5c3612e5a4f3adff4513c022af79fac8730e"
-  integrity sha512-+UND5NLUOd4w1vq8K24maGuM+ODqxw7wjgdeYPo36sL80cfeTFA0pte8xkF6rrgc5OmuHmgqTrJnCVO1NUekKQ==
+remarker@^1.12.1:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/remarker/-/remarker-1.12.1.tgz#b34dba0fddd507945d3501e4bed75c8630ddc56b"
+  integrity sha512-ByfsUXeliu4EE5N9D+lxu1msZPkoje16Ls+Bo3piNVLVI109Ew9vQn8wulpEfv1+EuxW4D7IED+TfGbZV721gw==
   dependencies:
     berber "^1.4.0"
     connect-livereload "^0.6.0"
